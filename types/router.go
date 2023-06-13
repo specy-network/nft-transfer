@@ -8,10 +8,10 @@ import (
 
 const (
 
-	// NativePortID corresponds to the cosmos native module
+	// ERC721PortID corresponds to the cosmos native module
 	NativePortID = "nft-transfer"
 	// ERC721PortID corresponds to the Ethereum erc721 protocol
-	ERC721PortID = "erc721-transfer"
+	ERC721PortID = "erc-721"
 )
 
 // The router is a map from port name to the NFTKeeper
