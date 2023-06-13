@@ -316,6 +316,18 @@ func (k Keeper) processReceivedPacket(ctx sdk.Context, packet channeltypes.Packe
 	if err != nil {
 		return err
 	}
+	for _, tokenID := range data.TokenIds {
+		ctx.EventManager().EmitEvent(
+			sdk.NewEvent(
+				types.EventTypeReceive,
+				sdk.NewAttribute(sdk.AttributeKeySender, data.Sender),
+				sdk.NewAttribute(types.AttributeKeyReceiver, data.Receiver),
+				sdk.NewAttribute(types.AttributeKeyClassID, data.ClassId),
+				sdk.NewAttribute(types.AttributeKeyTokenID, tokenID),
+				sdk.NewAttribute(types.AttributeKeyContractAddress, types.AttributeValueCategory),
+			),
+		)
+	}
 
 	nftKeeper, err := k.GetNFTKeeper(packet.DestinationPort)
 	if err != nil {
